@@ -46,9 +46,14 @@ describe('Plane', function() {
       plane.takeOff(airport);
       expect(plane.isFlying).toBe(true);
     });
-    
+
     it('should return the takeoff message if successful', function() {
       expect(plane.takeOff(airport)).toEqual('Plane has successfully taken off');
+    });
+
+    it('should raise an error if weather is stormy', function() {
+      Weather.prototype.isStormy = function() { return true; };
+      expect(function() {plane.takeOff(airport);}).toThrow("Cannot takeoff when stormy");
     });
   });
 });

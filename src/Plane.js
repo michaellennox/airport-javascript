@@ -1,5 +1,6 @@
 function Plane() {
   this.isFlying = true;
+  this.weather = new Weather();
 }
 
 Plane.prototype.land = function(airport) {
@@ -9,6 +10,7 @@ Plane.prototype.land = function(airport) {
 };
 
 Plane.prototype.takeOff = function(airport) {
+  if (this.weather.isStormy) throw "Cannot takeoff when stormy";
   airport.release(this);
   this.isFlying = true;
   return 'Plane has successfully taken off';
