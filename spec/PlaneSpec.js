@@ -5,7 +5,8 @@ describe('Plane', function() {
   beforeEach(function() {
     plane = new Plane();
     airport = {
-      dock: function(arg){}
+      dock: function(arg){},
+      release: function(arg){}
     };
   });
 
@@ -19,12 +20,35 @@ describe('Plane', function() {
       plane.land(airport);
       expect(airport.dock).toHaveBeenCalledWith(plane);
     });
-    it('should change the value of flying to false', function() {
+
+    it('should change the value of isFlying to false', function() {
       plane.land(airport);
       expect(plane.isFlying).toBe(false);
     });
+
     it('should return the landing message if successfully landed', function() {
       expect(plane.land(airport)).toEqual('Plane has successfully landed');
+    });
+  });
+
+  describe('#takeOff', function() {
+    beforeEach(function() {
+      plane.land(airport);
+    });
+
+    it('should call #release on airport', function() {
+      spyOn(airport, 'release');
+      plane.takeOff(airport);
+      expect(airport.release).toHaveBeenCalledWith(plane);
+    });
+
+    it('should change isFlying to true', function() {
+      plane.takeOff(airport);
+      expect(plane.isFlying).toBe(true);
+    });
+    
+    it('should return the takeoff message if successful', function() {
+      expect(plane.takeOff(airport)).toEqual('Plane has successfully taken off');
     });
   });
 });

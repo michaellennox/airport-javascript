@@ -7,3 +7,9 @@ Plane.prototype.land = function(airport) {
   this.isFlying = false;
   return 'Plane has successfully landed';
 };
+
+Plane.prototype.takeOff = function(airport) {
+  airport.release(this);
+  this.isFlying = true;
+  return 'Plane has successfully taken off';
+};

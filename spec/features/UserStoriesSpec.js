@@ -15,4 +15,11 @@ describe('User Stories', function() {
     expect(plane.isFlying).toBe(false);
   });
 
+  it('An airport traffic controller should be able to instruct a plane to land and receive confirmation', function() {
+    plane.land(airport);
+    expect(plane.takeOff(airport)).toEqual('Plane has successfully taken off');
+    expect(airport.planes).not.toContain(plane);
+    expect(plane.isFlying).toBe(true);
+  });
+
 });
