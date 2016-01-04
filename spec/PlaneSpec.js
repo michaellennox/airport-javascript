@@ -10,7 +10,7 @@ describe('Plane', function() {
   });
 
   it('should be flying on initialization', function() {
-    expect(plane.flying).toBe(true);
+    expect(plane.isFlying).toBe(true);
   });
 
   describe('#land', function() {
@@ -21,7 +21,10 @@ describe('Plane', function() {
     });
     it('should change the value of flying to false', function() {
       plane.land(airport);
-      expect(plane.flying).toBe(false);
+      expect(plane.isFlying).toBe(false);
+    });
+    it('should return the landing message if successfully landed', function() {
+      expect(plane.land(airport)).toEqual('Plane has successfully landed');
     });
   });
 });

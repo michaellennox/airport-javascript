@@ -1,8 +1,9 @@
 function Plane() {
-  this.flying = true;
+  this.isFlying = true;
 }
 
 Plane.prototype.land = function(airport) {
   airport.dock(this);
-  this.flying = false;
+  this.isFlying = false;
+  return 'Plane has successfully landed';
 };
