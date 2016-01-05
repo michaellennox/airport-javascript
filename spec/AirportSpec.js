@@ -30,6 +30,15 @@ describe("Airport", function() {
       expect(plane.land).toHaveBeenCalled();
     });
 
+    it("does not allow planes to land when airport is full", function() {
+      for (var i = 0; i < 20; i++) {
+        airport.instructLanding(plane);
+      }
+      expect(function() {
+        airport.instructLanding(plane);
+      }).toThrow('Cannot land planes when airport is full');
+    });
+
     describe('when weather is stormy', function() {
       it('does not allow landing', function() {
         spyOn(weather, 'isStormy').and.callFake(function(){

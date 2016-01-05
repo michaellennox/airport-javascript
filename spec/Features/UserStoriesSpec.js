@@ -31,6 +31,20 @@ describe("User Stories", function(){
       expect(airport.planes).not.toContain(plane);
       expect(plane.landed).toBe(false);
     });
+
+    // As an air traffic controller
+    // To ensure safety
+    // I want to prevent landing when the airport is full
+    describe("while airport is full", function() {
+      it("does not allow planes to land", function() {
+        for (var i = 0; i < 20; i++) {
+          airport.instructLanding(new Plane());
+        }
+        expect(function() {
+          airport.instructLanding(plane);
+        }).toThrow('Cannot land planes when airport is full');
+      });
+    });
   });
 
   describe('while the weather is awful', function() {
@@ -57,4 +71,5 @@ describe("User Stories", function(){
       }).toThrow('Cannot land- weather is stormy');
     });
   });
+
 });
