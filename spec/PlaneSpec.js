@@ -14,6 +14,11 @@ describe("Plane", function() {
       plane.land();
       expect(plane.landed).toBe(true);
     });
+
+    it("raises an error if it is already landed", function() {
+      plane.land();
+      expect(function() { plane.land(); }).toThrow("Plane is already landed");
+    });
   });
 
   describe("#takeOff", function() {

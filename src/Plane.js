@@ -3,6 +3,7 @@ function Plane() {
 }
 
 Plane.prototype.land = function() {
+  if (this.landed === true) throw "Plane is already landed";
   this.landed = true;
 };
 

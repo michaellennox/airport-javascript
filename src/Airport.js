@@ -1,12 +1,12 @@
-function Airport(weather) {
+function Airport(capacity, weather) {
   this.weather = weather || new Weather();
   this.planes = [];
-  this.capacity = 20;
+  this._capacity = capacity || 20;
 }
 
 Airport.prototype.instructLanding = function(plane) {
   if (this.weather.isStormy()) throw 'Cannot land- weather is stormy';
-  if (this.planes.length >= this.capacity ) throw 'Cannot land planes when airport is full';
+  if (this.planes.length >= this._capacity ) throw 'Cannot land planes when airport is full';
   plane.land();
   this.planes.push(plane);
 };

@@ -45,6 +45,19 @@ describe("User Stories", function(){
         }).toThrow('Cannot land planes when airport is full');
       });
     });
+
+    // As the system designer
+    // So that the software can be used for many different airports
+    // I would like a default airport capacity that can be overridden as appropriate
+    it("capacity of airport is able to be increased", function() {
+      var largerAirport = new Airport(50);
+      for (var i = 0; i < 50; i++) {
+        largerAirport.instructLanding(new Plane());
+      }
+      expect(function() {
+        largerAirport.instructLanding(plane);
+      }).toThrow('Cannot land planes when airport is full');
+    });
   });
 
   describe('while the weather is awful', function() {

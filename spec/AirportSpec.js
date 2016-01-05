@@ -7,7 +7,7 @@ describe("Airport", function() {
     weather = {
       isStormy: function() { return false; }
     };
-    airport = new Airport(weather);
+    airport = new Airport(20, weather);
     plane = {
       land: function() {},
       takeOff: function() {}
@@ -16,6 +16,16 @@ describe("Airport", function() {
 
   it("airport's planes array is empty", function(){
     expect(airport.planes.length).toEqual(0);
+  });
+
+  it("capacity of airport is able to be increased", function() {
+    var largerAirport = new Airport(50, weather);
+    for (var i = 0; i < 50; i++) {
+      largerAirport.instructLanding(new Plane());
+    }
+    expect(function() {
+      largerAirport.instructLanding(plane);
+    }).toThrow('Cannot land planes when airport is full');
   });
 
   describe("#instructLanding", function() {
