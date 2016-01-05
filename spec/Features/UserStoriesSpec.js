@@ -34,19 +34,27 @@ describe("User Stories", function(){
   });
 
   describe('while the weather is awful', function() {
-
     beforeEach(function() {
       spyOn(Math, 'random').and.callFake(function() { return 0.9; });
     });
 
-    //   As an air traffic controller
-    //  To ensure safety
-    //  I want to prevent takeoff when weather is stormy
+    // As an air traffic controller
+    // To ensure safety
+    // I want to prevent takeoff when weather is stormy
     it("a plane should not take off when the weather is stormy", function() {
-      airport.instructLanding(plane);
+      airport.planes.push(plane);
       expect(function(){
         airport.instructTakeOff(plane);
       }).toThrow('Cannot take off- weather is stormy');
+    });
+
+    // As an air traffic controller
+    // To ensure safety
+    // I want to prevent landing when weather is stormy
+    it("a plane should not land when the weather is stormy", function() {
+      expect(function(){
+        airport.instructLanding(plane);
+      }).toThrow('Cannot land- weather is stormy');
     });
   });
 });

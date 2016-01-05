@@ -29,6 +29,17 @@ describe("Airport", function() {
       airport.instructLanding(plane);
       expect(plane.land).toHaveBeenCalled();
     });
+
+    describe('when weather is stormy', function() {
+      it('does not allow landing', function() {
+        spyOn(weather, 'isStormy').and.callFake(function(){
+          return true;
+        });
+        expect(function() {
+          airport.instructLanding(plane);
+        }).toThrow('Cannot land- weather is stormy');
+      });
+    });
   });
 
   describe('#instructTakeOff, when plane landed,', function() {
