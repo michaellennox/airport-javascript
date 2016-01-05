@@ -15,4 +15,12 @@ describe("Plane", function() {
       expect(plane.landed).toBe(true);
     });
   });
+
+  describe("#takeOff", function() {
+    it("changes landed to false", function() {
+      plane.land();
+      plane.takeOff();
+      expect(plane.landed).toBe(false);
+    });
+  });
 });

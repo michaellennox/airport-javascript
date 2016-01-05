@@ -5,3 +5,7 @@ function Plane() {
 Plane.prototype.land = function() {
   this.landed = true;
 };
+
+Plane.prototype.takeOff = function() {
+  this.landed = false;
+};

@@ -5,7 +5,8 @@ describe("Airport", function() {
   beforeEach(function() {
     airport = new Airport();
     plane = {
-      land: function() {}
+      land: function() {},
+      takeOff: function() {}
     };
   });
 
@@ -23,6 +24,31 @@ describe("Airport", function() {
       spyOn(plane, 'land');
       airport.instructLanding(plane);
       expect(plane.land).toHaveBeenCalled();
+    });
+  });
+
+  describe('#instructTakeOff, when plane landed,', function() {
+    beforeEach(function() {
+      airport.instructLanding(plane);
+    });
+
+    it('removes plane passed as arg from array', function() {
+      airport.instructTakeOff(plane);
+      expect(airport.planes).not.toContain(plane);
+    });
+
+    it('instructs a plane to take off', function() {
+      spyOn(plane, 'takeOff');
+      airport.instructTakeOff(plane);
+      expect(plane.takeOff).toHaveBeenCalled();
+    });
+  });
+
+  describe('#instructTakeOff, when plane not landed,', function() {
+    it('should throw an error', function() {
+      expect(function() {
+        airport.instructTakeOff(plane);
+      }).toThrow('Plane is not at this airport');
     });
   });
 });
